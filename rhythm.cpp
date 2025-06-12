@@ -47,6 +47,7 @@ int main(){
             }
             if (keshita == 0){
                 p.x = ((int)p.x + 25) / 50 * 50;
+                p.y = ((int)p.y + 50) / 100 * 100;
                 (*nows).push_back(p);
             }
         }
@@ -86,6 +87,13 @@ int main(){
 
         BeginDrawing();
             ClearBackground(WHITE);
+            if (nows == &reds){
+                DrawRectangle(0, 0, 800, 10, RED);
+            }else
+            if (nows == &blues){
+                DrawRectangle(0, 0, 800, 10, BLUE);
+            }else
+            {}
             DrawLine(bar_x, 0, bar_x, 450, BLACK);
             {
                 auto i = reds.begin();
