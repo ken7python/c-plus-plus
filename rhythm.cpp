@@ -20,8 +20,35 @@ int main(){
 
     while(! WindowShouldClose() ){
         if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-            Vector2 p =GetMousePosition();
-            (*nows).push_back(p);
+            Vector2 p = GetMousePosition();
+
+            int keshita = 0;
+            {
+                auto i = reds.begin();
+                while(i !=  reds.end()) {
+                    if (CheckCollisionPointCircle(p, *i, 10)){
+                        i = reds.erase(i);
+                        keshita = keshita + 1;
+                    } else{
+                        ++i;
+                    }
+                }
+            }
+            {
+                auto i = blues.begin();
+                while(i !=  blues.end()) {
+                    if (CheckCollisionPointCircle(p, *i, 10)){
+                        i = blues.erase(i);
+                        keshita = keshita + 1;
+                    } else{
+                        ++i;
+                    }
+                }
+            }
+            if (keshita == 0){
+                p.x = ((int)p.x + 25) / 50 * 50;
+                (*nows).push_back(p);
+            }
         }
         if(IsKeyPressed(KEY_UP)){
             if(nows == &reds){
@@ -31,7 +58,7 @@ int main(){
                 nows = &reds;
             }
         } 
-       if(IsKeyPressed(KEY_RIGHT)){
+        if(IsKeyPressed(KEY_RIGHT)){
             bar_s = bar_s + 1;
         }
         if(IsKeyPressed(KEY_LEFT)){
